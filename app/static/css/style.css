@@ -1,3 +1,7 @@
 .comment {
     background-color: green;
 }
+
+.register-form span, .edit-form span {
+    color: red;
+}
