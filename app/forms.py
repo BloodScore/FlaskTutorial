@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_login import current_user
 from wtforms import StringField, BooleanField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from app.models import User
@@ -35,6 +36,11 @@ class EditProfileForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
-            raise ValidationError('This username is already taken!')
+        if current_user.username != username.data:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('This username is already taken!')
+
+
+class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')
