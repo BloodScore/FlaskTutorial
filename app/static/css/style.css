@@ -2,6 +2,6 @@
     background-color: green;
 }
 
-.register-form span, .edit-form span {
+.register-form span, .edit-form span, post-form span, reset-password-request-form span, reset-password-form span {
     color: red;
 }

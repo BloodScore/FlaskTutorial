@@ -18,4 +18,6 @@ class Config:
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS')
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    ADMINS = ['golysh99@mail.ru']
+    ADMINS = os.environ.get('ADMINS')
+    POSTS_PER_PAGE = int(os.environ.get('POSTS_PER_PAGE'))
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
