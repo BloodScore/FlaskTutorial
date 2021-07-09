@@ -1,11 +1,11 @@
 import requests
-from app import app
+from flask import current_app
 
 
 def translate(text, dest_language):
-    if 'MS_TRANSLATOR_KEY' not in app.config or not app.config['MS_TRANSLATOR_KEY']:
+    if 'MS_TRANSLATOR_KEY' not in current_app.config or not current_app.config['MS_TRANSLATOR_KEY']:
         return 'Error: the translation service is not configured.'
-    headers = {'Ocp-Apim-Subscription-Key': app.config['MS_TRANSLATOR_KEY'], 'Content-Type': 'application/json'}
+    headers = {'Ocp-Apim-Subscription-Key': current_app.config['MS_TRANSLATOR_KEY'], 'Content-Type': 'application/json'}
 
     response = requests.post(
         f'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to={dest_language}',

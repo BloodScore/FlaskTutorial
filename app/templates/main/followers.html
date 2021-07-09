@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'main/base.html' %}
 
 {% block app_content %}
 	{% if current_user.username == username %}
@@ -7,9 +7,9 @@
 		<h1>{{ username }}'s followers</h1>
 	{% endif %}
 	{% for follow in followers %}
-		{% include '_follow.html' %}
+		{% include 'main/_follow.html' %}
 	{% endfor %}
 
-	{% include '_pagination.html' %}
+	{% include 'main/_pagination.html' %}
 
 {% endblock %}
