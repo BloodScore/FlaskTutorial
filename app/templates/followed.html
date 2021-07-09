@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+	{% if current_user.username == username %}
+		<h1>Users you follow</h1>
+	{% else %}
+		<h1>Users {{ username }} follow</h1>
+	{% endif %}
+	{% for follow in followed %}
+		{% include '_follow.html' %}
+	{% endfor %}
+
+	{% include '_pagination.html' %}
+
+{% endblock %}

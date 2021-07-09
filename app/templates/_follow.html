@@ -1,0 +1,22 @@
+<table class="table table-hover">
+    <tr>
+        <td width="70px">
+            <a href="{{ url_for('profile', username=follow.username) }}">
+                <img src="{{ follow.avatar(70) }}" />
+            </a>
+        </td>
+        <td>
+            <a href="{{ url_for('profile', username=follow.username) }}">
+                {{ follow.username }}
+            </a>
+            {% if follow.about_me %}
+                <br>
+                About: {{ follow.about_me }}
+            {% endif %}
+            {% if follow.last_seen %}
+                <br>
+                Last seen on: {{ moment(follow.last_seen).format('LLL') }}
+            {% endif %}
+        </td>
+    </tr>
+</table>

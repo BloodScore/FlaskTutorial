@@ -209,3 +209,33 @@ def translate_text():
             'text': translate(text, request.form['dest_language'])
         }
     )
+
+
+@app.route('/<username>/followers')
+@login_required
+def followers_list(username):
+    page = request.args.get('page', 1, type=int)
+
+    if current_user.username == username:
+        followers = current_user.followers.paginate(page, app.config['USERS_PER_PAGE'], False)
+    else:
+        followers = User.query.filter_by(username=username).first_or_404().followers.paginate(page, app.config['USERS_PER_PAGE'], False)
+
+    next_url = url_for('followers_list', page=followers.next_num) if followers.has_next else None
+    prev_url = url_for('followers_list', page=followers.prev_num) if followers.has_prev else None
+    return render_template('followers.html', followers=followers.items, prev_url=prev_url, next_url=next_url, username=username)
+
+
+@app.route('/<username>/followed')
+@login_required
+def followed_list(username):
+    page = request.args.get('page', 1, type=int)
+
+    if current_user.username == username:
+        followed = current_user.followed.paginate(page, app.config['USERS_PER_PAGE'], False)
+    else:
+        followed = User.query.filter_by(username=username).first_or_404().followed.paginate(page, app.config['USERS_PER_PAGE'], False)
+
+    next_url = url_for('followed_list', page=followed.next_num) if followed.has_next else None
+    prev_url = url_for('followed_list', page=followed.prev_num) if followed.has_prev else None
+    return render_template('followed.html', followed=followed.items, prev_url=prev_url, next_url=next_url, username=username)
