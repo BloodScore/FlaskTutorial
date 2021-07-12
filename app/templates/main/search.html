@@ -1,0 +1,15 @@
+{% extends 'main/base.html' %}
+
+{% block app_content %}
+	<h1>Search Results</h1>
+	{% if posts %}
+		{% for post in posts %}
+			{% include 'main/_post.html' %}
+		{% endfor %}
+		{% include 'main/_pagination.html' %}
+	{% else %}
+		<hr>
+		<h2>No posts matching your query found!</h2>
+	{% endif %}
+
+{% endblock %}
